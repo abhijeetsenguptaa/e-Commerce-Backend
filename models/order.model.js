@@ -19,6 +19,10 @@ module.exports = {
             type: String,
             enum: ['pending', 'shipped', 'delivered'],
             default: 'pending'
+        },
+        purchasedOn: {
+            type: Date,
+            default: Date.now
         }
     }, {
         versionKey: false

@@ -13,7 +13,6 @@ module.exports = {
                         user = decode.userID
                         const userDetails = await UserModel.find({ _id: user })
                         role = userDetails[0].role
-                        console.log(user, userDetails, role)
                         next()
                     }
                     else {

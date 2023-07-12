@@ -7,13 +7,13 @@ module.exports = {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'users'
         },
-        products: [{
+        products: {
             productId: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'products'
             },
             quantity: Number
-        }]
+        }
     }, {
         versionKey: false
     }))
