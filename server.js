@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const connection = require('./configs/connection');
 const { userRoute } = require('./routes/user.route');
+const { productRoute } = require('./routes/product.route');
 
 
 const PORT = process.env.port || 8080
@@ -19,7 +20,8 @@ app.get('/', (req, res) => {
     })
 })
 
-app.use('/user', userRoute)
+app.use('/users', userRoute)
+app.use('/products', productRoute)
 
 app.listen(PORT, async () => {
     try {
