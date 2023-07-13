@@ -8,6 +8,7 @@ const { cartRoute } = require('./routes/cart.route');
 const { orderRoute } = require('./routes/order.route');
 const { addressRoute } = require('./routes/address.route');
 const { reviewRoute } = require('./routes/reviews.route');
+const { paymentRoute } = require('./routes/payment.route');
 
 
 const PORT = process.env.port || 8080
@@ -30,7 +31,7 @@ app.use('/cart', cartRoute)
 app.use('/orders', orderRoute)
 app.use('/address', addressRoute)
 app.use('/reviews', reviewRoute)
-
+app.use('/payments', paymentRoute)
 
 app.listen(PORT, async () => {
     try {
