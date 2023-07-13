@@ -134,28 +134,29 @@ module.exports = {
             const role = req.query.role;
             const id = req.query.id;
             if (id) {
-                const userDetails = await UserModel.find({ _id: id });
+                const userDetails = await UserModel.find({ _id: id }).populate('address');
                 res.status(200).json({
                     status: true,
                     data: userDetails
                 })
             } else if (role) {
-                const userDetails = await UserModel.find({ role });
+                const userDetails = await UserModel.find({ role }).populate('address');
                 res.status(200).json({
                     status: true,
                     data: userDetails
                 })
             } else {
-                const userDetails = await UserModel.find({});
+                const userDetails = await UserModel.find().populate('address')
                 res.status(200).json({
                     status: true,
                     data: userDetails
-                })
+                });
             }
-        } catch {
+        } catch (error) {
             res.status(500).json({
                 status: false,
-                msg: 'Internal Server Error in fetching the users.'
+                msg: 'Internal Server Error in fetching the users.',
+                error: error.message
             })
         }
     },

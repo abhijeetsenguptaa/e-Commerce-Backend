@@ -24,7 +24,12 @@ module.exports = {
     },
     deletingOrders: async (req, res) => {
         try {
-
+            const id = req.params.id;
+            await OrderModel.findByIdAndDelete({ _id: id });
+            res.status(200).json({
+                status: true,
+                msg: 'Cancelled the Order.'
+            })
         } catch {
             res.status(500).json({
                 status: false,
@@ -34,7 +39,13 @@ module.exports = {
     },
     updatingOrders: async (req, res) => {
         try {
-
+            const id = req.params.id;
+            const data = req.body;
+            await OrderModel.findByIdAndUpdate({ _id: id }, data);
+            res.status(200).json({
+                status: true,
+                msg: 'Order Updated.'
+            })
         } catch {
             res.status(500).json({
                 status: false,
@@ -44,25 +55,25 @@ module.exports = {
     },
     fetchingOrders: async (req, res) => {
         try {
-            const {id} = req.query;
-            const admin = await UserModel.findOne({_id:user});
+            const { id } = req.query;
+            const admin = await UserModel.findOne({ _id: user });
             const role = admin.role;
-            if(id){
-                const data = await OrderModel.findOne({_id:id}).populate('user','firstName lastName').populate('products.productId');
+            if (id) {
+                const data = await OrderModel.findOne({ _id: id }).populate('user', 'firstName lastName').populate('products.productId');
                 res.status(200).json({
                     status: true,
                     data: data
                 })
             }
-            if(role!="admin"){
-                const data = await OrderModel.find({user:user}).populate('products.productId');;
+            else if (role != "admin") {
+                const data = await OrderModel.find({ user: user }).populate('products.productId');;
                 res.status(200).json({
                     status: true,
                     data: data
                 })
             }
-            if(role=="admin"){
-                const data = await OrderModel.find().populate('user','-password').populate('products.productId','-quantity');
+            else if (role == "admin") {
+                const data = await OrderModel.find().populate('user', '-password').populate('products.productId', '-quantity');
                 res.status(200).json({
                     status: true,
                     data: data

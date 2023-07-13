@@ -15,7 +15,13 @@ module.exports = {
             type: String,
             enum: ['Electronics', 'Clothing', 'Books', 'Home Decor']
         },
-        image: String
+        image: String,
+        reviews: [{
+            userID: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'users'
+            }
+        }]
     }, {
         versionKey: false
     }))
