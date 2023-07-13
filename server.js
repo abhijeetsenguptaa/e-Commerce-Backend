@@ -7,6 +7,7 @@ const { productRoute } = require('./routes/product.route');
 const { cartRoute } = require('./routes/cart.route');
 const { orderRoute } = require('./routes/order.route');
 const { addressRoute } = require('./routes/address.route');
+const { reviewRoute } = require('./routes/reviews.route');
 
 
 const PORT = process.env.port || 8080
@@ -28,6 +29,8 @@ app.use('/products', productRoute)
 app.use('/cart', cartRoute)
 app.use('/orders', orderRoute)
 app.use('/address', addressRoute)
+app.use('/reviews', reviewRoute)
+
 
 app.listen(PORT, async () => {
     try {

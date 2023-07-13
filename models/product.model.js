@@ -20,6 +20,10 @@ module.exports = {
             userID: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'users'
+            },
+            reviewID:{
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'reviews'
             }
         }]
     }, {

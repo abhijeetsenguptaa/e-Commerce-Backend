@@ -65,7 +65,7 @@ module.exports = {
             const { id, category, name, sortBy, sortOrder, page, limit } = req.query;
             let query = {};
             if (id) {
-                const data = await ProductModel.find({ _id: id });
+                const data = await ProductModel.find({ _id: id }).populate('reviews.reviewID');
                 res.status(200).json(({
                     status: true,
                     data: data
@@ -92,7 +92,7 @@ module.exports = {
                 const products = await ProductModel.find(query)
                     .sort(sortOptions)
                     .skip(skip)
-                    .limit(pageSize);
+                    .limit(pageSize).populate('reviews.reviewID');
 
                 const totalCount = await ProductModel.countDocuments(query);
 
